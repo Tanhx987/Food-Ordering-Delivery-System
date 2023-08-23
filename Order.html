@@ -67,11 +67,11 @@
                                 <div class="navbar-collapse collapse clearfix">
                                     <ul class="navigation clearfix">
                                         <ul class="navigation clearfix">
-                                            
-                                            <li><a href="ResAboutUs.html">AboutUs</a></li>
-                                            
+                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="about.html">AboutUs</a></li>
+                                            <li><a href="foodres.html">Food</a></li>
                                             <li><a href="Order.html">Order</a></li>
-                                                    <li><a href="ResLogin.php">Logout</a></li>
+                                                    <li><a href="Login.php">Logout</a></li>
                                                     
                                         </ul>
                                     </li>
@@ -168,7 +168,7 @@
                                         <div class="widget-content">
                                             <ul class="list">
                                                 <li><a href="about.html">About Us</a></li>
-                                                
+                                                <li><a href="foodres.html">Food</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -210,6 +210,9 @@
                                         <div class="widget-content">
                                 <ul>
                                     <li><a href="checkout.html"> <img src="images/cod.png" alt="Cash On Delivery"></a>
+                                    </li>
+    
+                                    <li><a href="checkout.html"> <img src="images/PayPal_Logo_2007.png" alt="Paypal"></a>
                                     </li>
     
                                     <li><a href="checkout.html"> <img src="images/mastercard.png" alt="Mastercard"></a>
@@ -277,6 +280,7 @@
 
                 var orderHTML = `
                     <h2>${orderNumber}</h2>
+                    <button class="delete-button" onclick="deleteSelectedOrder(${selectedIndex})">Delete Order</button>
                         <p><strong>Name:</strong> ${order.name}</p>
                         <p><strong>Email:</strong> ${order.email}</p>
                         <p><strong>Phone:</strong> ${order.phone}</p>
@@ -323,9 +327,22 @@
                         </table>
                     `;
 
+                    
+
                     selectedOrderDiv.innerHTML = orderHTML;
                 }
             }
+            function deleteSelectedOrder(index) {
+            var orders = JSON.parse(localStorage.getItem('orders'));
+
+            if (orders && orders.length > index) {       
+                orders.splice(index, 1);
+                
+                localStorage.setItem('orders', JSON.stringify(orders));
+                
+                window.location.reload();
+            }
+        }
     </script>
 
 </body>
